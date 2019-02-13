@@ -1,3 +1,18 @@
+集成了以下内容：
+
+## ant-design
+## css-moudlers
+## scss
+## base64-js加密
+## webpack-bundle-analyzer 项目分析
+## react-router-dom路由管理&权限路由管理
+## loadable组件按需加载
+## utils工具类
+## 基于axios的网络封装库request.js
+## 状态码报错处理
+## mockjs模拟请求数据
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
