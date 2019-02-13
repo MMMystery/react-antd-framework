@@ -56,7 +56,7 @@ class Router extends React.Component {
                             父路由内容
                             <Switch>
                                 <PrivateRoute path="/father/aaa" component={Loadable({
-                                    loader: () => import('../pages/test/Test'),
+                                    loader: () => import('../pages/login/Login'),
                                     loading: () => <Spin/>,
                                 })}/>
                                 <PrivateRoute path="/father/bbb" component={Loadable({
