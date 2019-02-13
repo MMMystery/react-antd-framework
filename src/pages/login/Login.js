@@ -17,12 +17,7 @@ class Login extends React.Component {
 
 
     toLogin = async() => {
-        console.log('this.props')
-        console.log(this.props)
-        // window.document.getElementsByClassName('gggg')[0].innerHTML = '啊啊啊啊';
         try {
-
-
             const result = await IO_Login({
                 username: "test005",
                 password: toBASE64("123456"),
@@ -49,10 +44,7 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <div className="gggg"></div>
-                <Input/>
-                <Button className={styles.bbbb} onClick={this.toLogin}>登录</Button>
-                <span className={styles.name}>222222</span>
+                <Button className={styles.btn} onClick={this.toLogin}>登录</Button>
                 {
                     testData.list.map((item, index) => {
                         return <div key={index}>{item.name}</div>

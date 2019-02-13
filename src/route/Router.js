@@ -51,10 +51,6 @@ class Router extends React.Component {
                         loader: () => import('../pages/home/Home'),
                         loading: () => <Spin/>,
                     })}/>
-                    <Route path="/aaa" component={Loadable({
-                        loader: () => import('../pages/test/Test'),
-                        loading: () => <Spin/>,
-                    })}/>/>
                     <PrivateRoute path="/father" component={() => (
                         <div>
                             父路由内容

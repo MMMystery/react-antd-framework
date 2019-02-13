@@ -31,20 +31,7 @@ const checkStatus = response => {
     });
 };
 
-
-/**
- * Requests a URL, returning a promise.
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [option] The options we want to pass to "fetch"
- * @return {object}           An object containing either "data" or "err"
- */
 export default function request(url, option) {
-
-    /**
-     * Produce fingerprints based on url and parameters
-     * Maybe url has the same parameters
-     */
 
 
     const newOptions = {url, ...option};
@@ -57,7 +44,9 @@ export default function request(url, option) {
 
             newOptions.headers = {
                 Accept: 'application/json',
+                'X-Authorization': "Bearer "+window.localStorage.getItem('token'),
                 'Content-Type': 'application/json; charset=utf-8',
+
                 ...newOptions.headers,
             };
             newOptions.data = JSON.stringify(newOptions.body);
@@ -66,14 +55,18 @@ export default function request(url, option) {
 
             newOptions.headers = {
                 Accept: 'application/json',
+                'X-Authorization': "Bearer "+window.localStorage.getItem('token'),
                 ...newOptions.headers,
             };
             newOptions.data = newOptions.body;
         }
     }else{
+        newOptions.headers = {
+            'X-Authorization': "Bearer "+window.localStorage.getItem('token'),
+            ...newOptions.headers,
+        };
         const query = stringify(newOptions.body);
         newOptions.url += `?${query}`;
-        console.log(newOptions);
     }
     return axios({...newOptions})
         .then(response => { // 请求成功时
@@ -83,21 +76,18 @@ export default function request(url, option) {
             checkStatus(e.response);
             const status = e.response.status;
             if (status === 400) {
-                console.log("跳转到400页面")
-                return;
+                console.log("去跳转到400错误页面")
+            }
+            if(status === 401){
+                window.location.href="/"
             }
             if (status === 403) {
-                // router.push('/exception/403');
-                return;
             }
             if (status <= 504 && status >= 500) {
-                // router.push('/exception/500');
-                return;
             }
             if (status >= 404 && status < 422) {
-                return;
             }
-            return ;
+            return Promise.reject(e) ;
         });
 
 }
